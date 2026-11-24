@@ -206,7 +206,7 @@ function apply(offer) {
   if(account?.role!=='student') return;
   if(applications.some(a=>a.offer===offer.id && a.email===account.email)) return offerDetails(offer);
   modal(t('Postuler','Apply'),`<p>${esc(title(offer))} · ${esc(offer.company)}</p>`+form('apply',`<input type="hidden" name="offer" value="${esc(offer.id)}">`+textarea(t('Message à l’entreprise','Message to the employer'),'message')+
-  field(t('Nom du fichier CV (facultatif)','CV filename (optional)'),'cv','maxlength="120" placeholder="CV.pdf"')+t('Envoyer la candidature','Submit application')));
+  field(t('Joindre un CV (facultatif)','Attach CV (optional)'),'cvFile','accept=".pdf,application/pdf"','file')+'<p class="form-note">'+t('PDF, 5 Mo maximum. Le fichier reste dans ce navigateur.','PDF, up to 5 MB. The file stays in this browser.')+'</p>'+t('Envoyer la candidature','Submit application')));
 }
 const bookmarked = id=>account?.role==='student' && (saved[account.email]??[]).includes(id);
 function card(offer) {
@@ -236,7 +236,7 @@ function dashboard() {
   const owned=all().filter(offer=>offer.owner===account.email);
   const received=applications.filter(a=>company?owned.some(o=>o.id===a.offer):a.email===account.email);
   const items=company?owned:all().filter(offer=>bookmarked(offer.id));
-  return `<section class="shell section"><h2>${company?t('Espace entreprise','Company dashboard'):t('Espace étudiant','Student dashboard')}</h2><p>${esc(account.name)} · ${esc(account.email)}</p><div class="actions">${company?button(t('Publier une offre','Post an opening'),'post','primary'):button(t('Explorer les offres','Explore openings'),'browse','primary')}${button(t('Se déconnecter','Sign out'),'logout')}</div><div class="application-list"><h3>${company?t('Vos offres','Your openings'):t('Offres enregistrées','Saved openings')}</h3><div class="grid">${grid(items,t('Aucune offre pour le moment.','No openings yet.'))}</div><h3>${company?t('Candidatures reçues','Received applications'):t('Mes candidatures','My applications')}</h3><div class="grid">${received.length?received.map(a=>`<article class="card"><h3>${esc(title(all().find(o=>o.id===a.offer)))}</h3><div class="meta">${esc(company?a.name+' · '+a.email:all().find(o=>o.id===a.offer).company)}</div><div>${esc(a.message)}</div>${a.cv?`<div class="muted">CV · ${esc(a.cv)}</div>`:''}<div><span class="pill">${statusLabel(a.status)}</span></div>${company?reviewControl(a):''}${all().find(o=>o.id===a.offer)?.owner?`<button class="secondary" data-thread="${esc(JSON.stringify([a.offer,a.email]))}">${t('Ouvrir la conversation','Open conversation')}</button>`:''}</article>`).join(''):`<div class="empty">${t('Aucune candidature pour le moment.','No applications yet.')}</div>`}</div></div></section>`;
+  return `<section class="shell section"><h2>${company?t('Espace entreprise','Company dashboard'):t('Espace étudiant','Student dashboard')}</h2><p>${esc(account.name)} · ${esc(account.email)}</p><div class="actions">${company?button(t('Publier une offre','Post an opening'),'post','primary'):button(t('Explorer les offres','Explore openings'),'browse','primary')}${button(t('Se déconnecter','Sign out'),'logout')}</div><div class="application-list"><h3>${company?t('Vos offres','Your openings'):t('Offres enregistrées','Saved openings')}</h3><div class="grid">${grid(items,t('Aucune offre pour le moment.','No openings yet.'))}</div><h3>${company?t('Candidatures reçues','Received applications'):t('Mes candidatures','My applications')}</h3><div class="grid">${received.length?received.map(a=>`<article class="card"><h3>${esc(title(all().find(o=>o.id===a.offer)))}</h3><div class="meta">${esc(company?a.name+' · '+a.email:all().find(o=>o.id===a.offer).company)}</div><div>${esc(a.message)}</div>${a.cv?`<div class="muted">CV · ${esc(a.cv)}</div>`:''}${a.cvId?'<button type="button" class="secondary" data-cv="'+esc(a.cvId)+'">'+t('Télécharger le CV','Download CV')+'</button>':''}<div><span class="pill">${statusLabel(a.status)}</span></div>${company?reviewControl(a):''}${all().find(o=>o.id===a.offer)?.owner?`<button class="secondary" data-thread="${esc(JSON.stringify([a.offer,a.email]))}">${t('Ouvrir la conversation','Open conversation')}</button>`:''}</article>`).join(''):`<div class="empty">${t('Aucune candidature pour le moment.','No applications yet.')}</div>`}</div></div></section>`;
 }
 function render() {
   $('workspace').className=account?'workspace':'';
@@ -267,6 +267,8 @@ $('language').onclick=()=>{english=!english;write('english',english);render();};
 $('home').onclick=event=>{event.preventDefault();navigate('home');};
 
 document.addEventListener('click',event=>{
+  const cvButton=event.target.closest('[data-cv]');
+  if(cvButton){downloadCV(cvButton.dataset.cv);return;}
   const threadButton=event.target.closest('[data-thread]');
   if(threadButton){thread=threadButton.dataset.thread;navigate('messages');return;}
   const target=event.target.closest('[data-action]');
@@ -330,9 +332,39 @@ document.addEventListener('change',event=>{
   event.target.closest('.card').querySelector('.pill').textContent=statusLabel(application.status);
   msg(t('Statut enregistré.','Status saved.'));
 });
-document.addEventListener('submit',event=>{
+function cvRequest(mode, operation){
+  return new Promise((resolve,reject)=>{
+    const request=indexedDB.open('istic-attachments',1);
+    request.onupgradeneeded=()=>request.result.createObjectStore('cv');
+    request.onerror=()=>reject(request.error);
+    request.onsuccess=()=>{
+      const db=request.result;
+      const tx=db.transaction('cv',mode);
+      const result=operation(tx.objectStore('cv'));
+      tx.oncomplete=()=>{db.close();resolve(result.result);};
+      tx.onabort=()=>{db.close();reject(tx.error);};
+    };
+  });
+}
+async function downloadCV(id){
+  const application=applications.find(item=>item.cvId===id);
+  const offer=all().find(item=>item.id===application?.offer);
+  if(!application||!account||(account.role==='student'?application.email!==account.email:offer?.owner!==account.email))return;
+  try{
+    const file=await cvRequest('readonly',store=>store.get(id));
+    if(!file)throw Error('Missing attachment');
+    const url=URL.createObjectURL(file);
+    const link=document.createElement('a');
+    link.href=url;
+    link.download=application.cv;
+    link.click();
+    setTimeout(()=>URL.revokeObjectURL(url),10000);
+  }catch{msg(t('CV indisponible dans ce navigateur.','CV unavailable in this browser.'));}
+}
+document.addEventListener('submit',async event=>{
   event.preventDefault();
-  const data=Object.fromEntries([...new FormData(event.target)].map(([key,value])=>[key,value.trim()]));
+  const submission=new FormData(event.target);
+  const data=Object.fromEntries([...submission].filter(([,value])=>typeof value==='string').map(([key,value])=>[key,value.trim()]));
   if(event.target.id==='chat'){
     if(!data.message||!threads().some(item=>item.key===thread))return;
     try { localStorage.setItem('istic.message:'+thread,JSON.stringify([...messages(thread),{role:account.role,text:data.message,time:new Date().toISOString()}])); }
@@ -393,7 +425,22 @@ document.addEventListener('submit',event=>{
     if(!offer||isExpired(offer))return msg(t('Cette offre est clôturée.','This opening is closed.'));
     if(!data.message)return msg(t('Ajoutez un message.','Enter a message.'));
     if(applications.some(a=>a.offer===data.offer&&a.email===account.email))return;
-    applications=[{...data,email:account.email,name:account.name},...applications];
+    const file=submission.get('cvFile');
+    const applicant=account;
+    if(file?.name){
+      if(file.size>5*1024*1024||!file.name.toLowerCase().endsWith('.pdf')||await file.slice(0,5).text()!=='%PDF-'){
+        return msg(t('Choisissez un PDF de 5 Mo maximum.','Choose a PDF up to 5 MB.'));
+      }
+      data.cvId=crypto.randomUUID();
+      data.cv=file.name;
+      try{await cvRequest('readwrite',store=>store.put(file,data.cvId));}
+      catch{return msg(t('Le CV n’a pas pu être enregistré.','The CV could not be saved.'));}
+      if(account!==applicant||applications.some(item=>item.offer===data.offer&&item.email===applicant.email)){
+        await cvRequest('readwrite',store=>store.delete(data.cvId)).catch(()=>{});
+        return;
+      }
+    }
+    applications=[{...data,email:applicant.email,name:applicant.name},...applications];
     write('applications',applications);
     $('dialog').close();
     navigate('student');
@@ -413,3 +460,4 @@ $('menu-backdrop').onclick=()=>{setMenu(false);$('menu').focus();};
 
 document.addEventListener('keydown',event=>{if(event.key==='Escape'&&$('nav').classList.contains('open')){setMenu(false);$('menu').focus();}});
 </script></body></html>
+
