@@ -1,3 +1,416 @@
 <!doctype html>
-<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Offres de stage et d’emploi pour les étudiants de l’ISTIC"><title>ISTIC Project · Career Portal</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="style.css"><script src="app.js" defer></script></head>
-<body><header><div class="shell nav"><a class="brand" href="#" id="home"><span class="mark">i</span><span>ISTIC<span class="brand-accent"> Careers</span></span></a><nav id="nav"></nav><div class="nav-actions"><button id="language" class="plain"></button><button id="account" class="primary"></button></div></div></header><main id="main"></main><footer><div class="shell footer"><strong>ISTIC Careers</strong><span id="footnote"></span></div></footer><dialog id="dialog" aria-labelledby="modal-title"><div id="modal"></div></dialog><div id="toast" role="status" aria-live="polite"></div></body></html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Offres de stage et d’emploi pour les étudiants de l’ISTIC"><title>ISTIC Project · Career Portal</title><style>:root{--ink:#141c23;--muted:#545c64;--green:#003366;--pale:#e5eef7;--line:#dce2e7;--paper:#f6f9f6;--white:#fff;font:16px Manrope,system-ui,sans-serif;color:var(--ink);background:var(--paper)}*{box-sizing:border-box}body{margin:0}button,input,select,textarea{font:inherit}button,a,select{touch-action:manipulation}button{cursor:pointer}a{color:inherit;text-decoration:none}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #004f9d;outline-offset:3px}.shell{width:min(1160px,calc(100% - 48px));margin:auto}header{background:#fff;border-bottom:1px solid var(--line)}.nav,.footer{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:74px}.brand{display:flex;align-items:center;gap:10px;font-size:21px;font-weight:800;white-space:nowrap}.mark{display:grid;place-items:center;background:var(--green);color:#fff;width:36px;height:36px;border-radius:10px;font-size:24px;font-weight:800}.brand-accent{color:var(--green)}nav,.nav-actions,.actions,.filters,.meta,.tags{display:flex;align-items:center;gap:10px;flex-wrap:wrap}nav button,.plain{border:0;background:none;color:var(--muted);padding:9px 12px;font-weight:800;font-size:.875rem}.primary,.secondary{display:inline-flex;align-items:center;justify-content:center;border:1px solid transparent;border-radius:10px;padding:10px 15px;font-weight:800;font-size:.875rem;min-height:42px}.primary{background:var(--green);color:white}.primary:hover{background:#00284f}.secondary{background:white;border-color:var(--line);color:var(--ink)}.secondary:hover{border-color:var(--green);color:var(--green)}.hero{position:relative;isolation:isolate;overflow:hidden;border-radius:26px;margin-top:34px;background:#0d2033;color:white;display:grid;grid-template-columns:1.5fr 1fr;min-height:345px;padding:48px;align-items:center}.hero::before{content:'';position:absolute;inset:0;z-index:-1;background:radial-gradient(ellipse at 80% 55%,#13395e,transparent 60%)}.hero h1{font-size:clamp(2.55rem,5.2vw,4.75rem);line-height:1.02;letter-spacing:-.073em;margin:14px 0 16px;max-width:700px}.hero h1 em{color:#a8cdf2;font-style:normal}.hero p{color:#d6e0ea;line-height:1.65;max-width:500px;margin:0 0 22px}.hero .primary{background:#aacbeb;color:#0d2033}.eyebrow{font-size:.875rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#a8cdf2}.art{position:relative;display:grid;place-items:center;min-height:245px}.orbit{width:245px;aspect-ratio:1;border:1px solid #7596b777;border-radius:50%;position:absolute}.orbit:before,.orbit:after{content:'';position:absolute;border:1px solid #7596b766;border-radius:50%;inset:24px}.orbit:after{inset:-24px;border-style:dashed}.tile{font-size:68px;color:#c2ddf8;display:grid;place-items:center;width:126px;height:126px;background:#ffffff15;border:1px solid #b4d7f980;border-radius:28px;transform:rotate(-12deg);box-shadow:0 14px 45px #06172766}.spark{position:absolute;color:#a8cdf2;font-size:35px;top:15%;right:17%}.spark.small{top:auto;bottom:9%;right:auto;left:14%;font-size:23px}.section{padding:40px 0 54px;min-height:55vh}.section h2{margin:0 0 6px;font-size:clamp(1.65rem,4vw,2.25rem);letter-spacing:-.05em}.section p,.muted,.footer{color:var(--muted)}.section p{margin:0 0 16px;line-height:1.6}.filters{background:#fff;border:1px solid var(--line);border-radius:15px;padding:12px;margin:21px 0}.filters input{flex:2;min-width:180px}.filters select{flex:1;min-width:136px}input,select,textarea{width:100%;border:1px solid var(--line);border-radius:9px;padding:10px 12px;color:var(--ink);background:#fff;min-height:42px}select{appearance:none;padding-right:34px;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='m5 8 5 5 5-5' fill='none' stroke='%2354645e' stroke-width='2'/%3E%3C/svg%3E") right 9px center/17px no-repeat}.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px}.card{background:white;border:1px solid var(--line);border-radius:16px;padding:19px;display:flex;flex-direction:column;gap:13px;min-width:0;overflow-wrap:anywhere}.card h3{font-size:1.12rem;letter-spacing:-.025em;margin:0}.card .actions{margin-top:auto}.card-head{display:flex;justify-content:space-between;align-items:center;gap:8px}.logo{width:42px;height:42px;display:grid;place-items:center;border-radius:11px;background:#e3ecf5;color:#12375b;font-weight:800}.card:nth-child(3n+2) .logo{background:#eee8ff;color:#573697}.card:nth-child(3n+3) .logo{background:#fff0dc;color:#884d16}.meta,.tags{font-size:.875rem;color:var(--muted)}.pill{background:var(--pale);color:#093159;padding:5px 9px;border-radius:7px;font-size:.875rem;font-weight:800}.result{font-size:.875rem;font-weight:800}.empty{padding:25px;border:1px dashed #a9b4be;border-radius:14px;grid-column:1/-1}.footer{border-top:1px solid var(--line);font-size:.875rem}dialog{border:1px solid var(--line);border-radius:18px;width:min(540px,calc(100% - 22px));padding:23px;color:var(--ink);max-height:90dvh}dialog::backdrop{background:#09141ea3}dialog h2{margin:0 0 10px;font-size:1.55rem}dialog p{line-height:1.55;overflow-wrap:anywhere}dialog form{display:grid;gap:12px}label{display:grid;gap:5px;font-size:.875rem;font-weight:800}.close{float:right}#toast{position:fixed;bottom:18px;right:18px;z-index:3;background:#0d2033;color:#fff;border-radius:10px;padding:12px 16px;max-width:calc(100% - 36px)}#toast:empty{display:none}.application-list{margin-top:22px}.application-list h3{margin-bottom:12px}@media(max-width:850px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.hero{padding:34px}.orbit{width:185px}}@media(max-width:650px){.shell{width:calc(100% - 28px)}.nav{flex-wrap:wrap;padding:12px 0;gap:8px}.nav nav{order:3;width:100%}.nav nav button{padding-left:0}.brand{font-size:17px}.brand .mark{width:30px;height:30px}.hero{display:block;margin-top:16px;min-height:auto;padding:24px}.art{display:none}.grid{grid-template-columns:1fr}.filters input,.filters select{flex-basis:100%}.footer{align-items:flex-start;flex-direction:column;padding:16px 0;gap:5px}}
+
+[hidden]{display:none!important}.entrance{display:grid;grid-template-columns:1.05fr 1fr;gap:0;margin:44px auto 56px;border:1px solid #dce2e7;border-radius:28px;overflow:hidden;background:#fff;box-shadow:0 18px 54px #121f2c12}.entrance-art{display:flex;align-items:flex-end;min-height:600px;padding:54px;position:relative;isolation:isolate;overflow:hidden;color:white;background:radial-gradient(ellipse at 78% 0%,#215487,#0b1f33 62%)}.entrance-art:before,.entrance-art:after{content:'';position:absolute;z-index:-1;width:370px;aspect-ratio:1;border:1px solid #a4ccf444;border-radius:50%;top:-80px;right:-85px;box-shadow:0 0 0 28px #a4ccf415,0 0 0 58px #a4ccf412,0 0 0 90px #a4ccf40b}.entrance-art:after{width:180px;top:0;right:0;border-style:dashed;box-shadow:none}.entrance-copy h1{font-size:clamp(2.8rem,5.8vw,5.4rem);line-height:.97;letter-spacing:-.075em;margin:17px 0 22px}.entrance-copy p{max-width:420px;color:#d7e3ef;line-height:1.7}.entrance-tags{display:flex;gap:10px;flex-wrap:wrap}.entrance-tags span{border:1px solid #a3bdd774;padding:7px 12px;border-radius:99px;font-size:.875rem}.access-panel{padding:clamp(24px,5vw,62px);align-self:center}.access-panel h2,.settings-panel h2{font-size:clamp(1.9rem,4vw,2.9rem);letter-spacing:-.06em;margin:0}.role-picker{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:22px 0}.access-panel form,.settings-panel form{display:grid;gap:13px}.access-panel .switch-mode .plain{padding:4px;color:var(--green)}.sample-account{display:grid;gap:8px;background:#eff4f8;border:1px solid #d7e0e9;border-radius:12px;padding:13px;overflow-wrap:anywhere;font-size:.875rem}.sample-account button{justify-self:start}.settings-panel{max-width:650px;margin:auto;background:#fff;border:1px solid var(--line);border-radius:20px;padding:26px}.settings-panel .actions{margin-top:16px}@media(max-width:750px){.entrance{grid-template-columns:1fr;margin:18px auto 32px;border-radius:20px}.entrance-art{min-height:260px;padding:28px}.entrance-copy h1{max-width:560px}.access-panel{padding:24px}}
+html{color-scheme:light}input,textarea,select,option{background-color:#fff!important;color:#141c23!important;-webkit-text-fill-color:#141c23;caret-color:#002d59;border-color:#848f9a}input::placeholder,textarea::placeholder{color:#505a63!important;-webkit-text-fill-color:#505a63;opacity:1}input:-webkit-autofill{-webkit-box-shadow:0 0 0 1000px #f2f9ff inset}label{color:#202c37}dialog{background:#fff;color:#141c23}dialog form,.access-panel form,.settings-panel form{gap:16px}textarea{line-height:1.55}.card:hover{border-color:#8da1b4}.card .meta{color:#424e5a}.card label{margin-top:4px}.form-note{font-size:.875rem;color:#434e59}.card-status{align-self:start}:root{--ink:#172d38;--muted:#4e6470;--green:#003264;--pale:#dfebf6;--line:#d4e2e1;--paper:#f3f7f8;font-family:"Segoe UI",system-ui,sans-serif}header{position:sticky;top:0;z-index:2;background:#fffffff5;backdrop-filter:blur(12px)}.shell{width:min(1210px,calc(100% - 44px))}.nav button:hover,.plain:hover{color:#003264;background:#eff4f8;border-radius:9px}.hero{background:linear-gradient(125deg,#102e3d,#062f58);box-shadow:0 18px 40px #13293e26}.hero::before{background:radial-gradient(circle at 78% 44%,#5c8bb94d,transparent 38%)}.hero h1{line-height:1.05}.entrance-art{background:radial-gradient(ellipse at 80% 0%,#21507e,#102c3a 70%)}.card{box-shadow:0 6px 18px #10253a10;padding:22px}.card h3{font-size:1.18rem}.filters{box-shadow:0 4px 16px #10253a0b}.primary,.secondary{min-height:44px}.section>h2{margin-top:6px}.inbox{display:grid;grid-template-columns:minmax(215px,30%) 1fr;min-height:450px;border:1px solid var(--line);border-radius:20px;overflow:hidden;background:#fff;box-shadow:0 12px 32px #163a3710}.inbox aside{padding:14px;background:#edf5f4;border-right:1px solid var(--line)}.thread-link{display:block;text-align:left;width:100%;padding:12px;border:1px solid transparent;border-radius:10px;background:none;color:var(--ink);margin:3px 0;overflow-wrap:anywhere}.thread-link strong,.thread-link span{display:block}.thread-link span{font-size:.875rem;color:var(--muted);margin-top:3px}.thread-link:hover,.thread-link[aria-current=true]{background:white;border-color:var(--line)}.thread-area{display:grid;grid-template-rows:auto 1fr auto;min-width:0}.thread-heading{padding:15px 20px;border-bottom:1px solid var(--line)}.thread-heading h3{margin:0 0 4px}.thread-log{display:flex;flex-direction:column;gap:10px;min-height:210px;max-height:420px;overflow:auto;padding:16px 20px}.bubble{align-self:flex-start;max-width:86%;padding:9px 12px;background:#edf3f6;border-radius:12px;overflow-wrap:anywhere;white-space:pre-wrap;color:#172d38}.bubble.mine{align-self:flex-end;background:#dfebf6}.bubble time{display:block;font-size:.78rem;color:#45515c;margin-top:5px}.thread-area form{padding:14px 20px;border-top:1px solid var(--line);display:grid;gap:8px}.thread-area form button{justify-self:end}.workspace-note{font-size:.875rem;color:#405863}html{color-scheme:light}input,select,textarea,option{color:#172d38!important;background-color:#fff!important;-webkit-text-fill-color:#172d38;caret-color:#003264}input::placeholder,textarea::placeholder{color:#4e6470!important;-webkit-text-fill-color:#4e6470;opacity:1}@media(max-width:680px){.shell{width:calc(100% - 24px)}.inbox{grid-template-columns:1fr}.inbox aside{border-right:0;border-bottom:1px solid var(--line);max-height:190px;overflow:auto}}:root{--green:#17458d;--ink:#132744;--muted:#465a74;--paper:#f3f6fc;--pale:#e3edff;--line:#d7e2f2}.primary:hover{background:#102f63}.hero{background:linear-gradient(120deg,#102141,#184a91)}.hero::before{background:radial-gradient(circle at 78% 44%,#6caef666,transparent 45%)}.hero h1 em,.eyebrow,.spark{color:#b8dcff}.hero .primary{background:#c1ddff;color:#102444}.entrance-art{background:radial-gradient(ellipse at 85% 0%,#3269ab,#102344 72%)}.entrance{max-width:1030px}.entrance-art{min-height:530px}.access-panel input{min-height:48px}.access-panel .role-picker{background:#edf2fb;padding:5px;border-radius:13px}.access-panel .role-picker button{border-color:transparent}.access-panel .role-picker .secondary{background:transparent}.password-row{display:flex;align-items:center;gap:8px}.password-row input{min-width:0}.password-row button{white-space:nowrap}.workspace{display:grid;grid-template-columns:222px minmax(0,1fr);width:min(1450px,100%);margin:auto}.workspace nav{position:sticky;top:74px;align-self:start;display:grid;gap:7px;padding:25px 12px 25px 18px;border-right:1px solid var(--line);min-height:calc(100dvh - 74px);align-content:start;background:#eef3fb}.workspace nav button{text-align:left;min-height:43px;border-radius:9px}.workspace nav button:hover,.workspace nav button[aria-current=page]{background:#dbe9ff;color:#143975}.workspace main{min-width:0}.workspace main>.shell{width:calc(100% - 36px)}.offer-section{border-top:1px solid var(--line);padding-top:12px;margin-top:15px}.offer-section h3{font-size:1rem;margin:0}.offer-section p{white-space:pre-wrap;margin:5px 0}.inbox aside{background:#edf3ff}.bubble.mine{background:#dceaff}.mobile-menu{display:none}@media(max-width:760px){.workspace{display:block}.mobile-menu:not([hidden]){display:inline-flex}.workspace nav{position:fixed;top:74px;left:0;bottom:0;width:min(280px,82vw);overflow:auto;z-index:4;visibility:hidden;transform:translateX(-105%);transition:transform .2s,visibility .2s}.workspace nav.open{visibility:visible;transform:translateX(0);box-shadow:0 0 0 100vmax #12254470}.workspace main>.shell{width:calc(100% - 24px)}.entrance-art{min-height:245px}}@media(prefers-reduced-motion:reduce){.workspace nav{transition:none}}button svg{flex:none}button:has(svg){display:inline-flex;align-items:center;gap:9px}.mobile-menu:not([hidden]){display:inline-flex}.workspace{display:block}.workspace nav{position:fixed;top:74px;left:0;bottom:0;width:min(290px,85vw);z-index:5;overflow-y:auto;visibility:hidden;transform:translateX(-100%);transition:transform .24s ease,visibility .24s;background:#102649;color:#fff;gap:8px;padding:22px 15px}.workspace nav.open{visibility:visible;transform:translateX(0);box-shadow:0 0 0 100vmax #101d3960}.workspace nav button,.workspace nav .side-title{color:#edf4ff}.workspace nav button:hover,.workspace nav button[aria-current=page]{color:white;background:#294671}.workspace main>.shell{width:min(1170px,calc(100% - 32px))}.listing-summary{margin:0!important;line-height:1.55!important}.listing-banner{margin:16px 0 22px;padding:clamp(22px,5vw,45px);border-radius:20px;background:linear-gradient(105deg,#102649,#205291);color:white}.listing-banner h1{font-size:clamp(2rem,5vw,3.5rem);line-height:1.08;margin:12px 0;overflow-wrap:anywhere}.listing-banner p{color:#deebff;margin:0}.listing-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(230px,30%);gap:20px;align-items:start}.listing-article,.listing-facts{background:white;border:1px solid var(--line);border-radius:17px;padding:clamp(18px,3vw,28px);overflow-wrap:anywhere}.listing-article .offer-section:first-child{margin:0;padding:0;border:0}.listing-article h3{font-size:1.22rem;margin-bottom:8px}.listing-facts h3{margin-top:0}.listing-facts dt{font-weight:700}.listing-facts dd{margin:2px 0 13px;color:var(--muted)}.profile-card{display:flex;align-items:center;gap:17px;padding:24px 18px;margin:18px 0 23px;border-radius:15px;background:linear-gradient(110deg,#e1ecff,#f2f7ff);overflow-wrap:anywhere}.profile-avatar{width:62px;height:62px;display:grid;flex:none;place-items:center;border-radius:16px;background:#173d7c;color:white;font-weight:800;font-size:1.45rem}.profile-card div span,.profile-card strong{display:block}.profile-card strong{font-size:1.3rem}.profile-card div span{color:var(--muted)}@media(max-width:680px){.listing-layout{grid-template-columns:1fr}}@media(prefers-reduced-motion:reduce){.workspace nav{transition:none}}.workspace{display:grid;grid-template-columns:222px minmax(0,1fr)}.workspace nav{position:sticky;top:74px;left:auto;bottom:auto;width:auto;visibility:visible;transform:none;box-shadow:none;max-height:calc(100dvh - 74px)}.workspace nav.open{box-shadow:none}.mobile-menu:not([hidden]),.menu-backdrop{display:none}.nav .brand{margin-right:auto}@media(max-width:760px){.workspace{display:block}.mobile-menu:not([hidden]){display:inline-flex;flex:none;min-height:44px}.nav{flex-wrap:nowrap;min-height:74px;gap:8px}.nav .brand{min-width:0}.workspace nav{position:fixed;top:74px;left:0;bottom:0;width:min(290px,85vw);max-height:none;min-height:0;visibility:hidden;transform:translateX(-100%);z-index:5}.workspace nav.open{visibility:visible;transform:translateX(0)}.menu-backdrop:not([hidden]){display:block;position:fixed;inset:74px 0 0;z-index:4;background:#101d3966;border:0}.workspace main>.shell{width:calc(100% - 24px)}}@media(max-width:360px){.mobile-menu:not([hidden]){font-size:0;padding-inline:10px}.nav .brand{font-size:15px}}
+.workspace{display:block}.mobile-menu:not([hidden]){display:inline-flex;gap:8px;min-height:44px}.workspace nav,.workspace nav.open{position:fixed;top:74px;left:0;bottom:0;width:min(290px,85vw);min-height:0;max-height:none;box-shadow:8px 0 30px #0c1e4433;z-index:5}.workspace nav{visibility:hidden;transform:translateX(-100%)}.workspace nav.open{visibility:visible;transform:translateX(0)}.menu-backdrop:not([hidden]){display:block;position:fixed;inset:74px 0 0;z-index:4;background:#101d3966;border:0}.workspace main>.shell{width:min(1170px,calc(100% - 32px))}@media(max-width:760px){.workspace main>.shell{width:calc(100% - 24px)}}
+
+.workspace #nav,.workspace #nav.open{inset:0 auto 0 0;height:100vh;height:100dvh;max-height:none;min-height:0;box-sizing:border-box;z-index:21;padding-top:max(18px,env(safe-area-inset-top));padding-bottom:max(18px,env(safe-area-inset-bottom));overscroll-behavior:contain}
+.workspace #menu-backdrop:not([hidden]){inset:0;z-index:20}
+.workspace #nav .drawer-close{justify-self:end;text-align:center;padding:8px 12px;border:1px solid #637b9d;color:#f2f7ff}
+:root{--ink:#101c36;--muted:#435674;--green:#234eae;--line:#d6e0f4;--paper:#f5f7fd;--pale:#e5edff}body{background:radial-gradient(ellipse at 90% 0%,#e4eaff 0%,transparent 36%),#f5f7fd}header{background:#f9fbfff2;border-bottom:1px solid #d6e0f4}.mark,.primary{background:linear-gradient(135deg,#1e438e,#345dd6)}.primary:hover{background:#173d96}.hero,.listing-banner,.entrance-art{background-color:#101c3d;background-image:radial-gradient(ellipse at 83% 24%,#365cd0 0%,transparent 56%),linear-gradient(125deg,#101a36,#172754);box-shadow:0 18px 55px #162b6840}.hero:before{background-image:linear-gradient(#c1d7ff1c 1px,transparent 1px),linear-gradient(90deg,#c1d7ff1c 1px,transparent 1px);background-size:36px 36px;mask-image:linear-gradient(90deg,transparent 40%,black)}.hero h1 em,.eyebrow{color:#c5d6ff}.card,.filters,.listing-article,.listing-facts,.settings-panel,.inbox,.access-panel{font-family:inherit}.card,.filters,.listing-article,.listing-facts,.settings-panel,.inbox{border-color:#d6e0f4;box-shadow:0 12px 30px #2e46980c}.card:hover{border-color:#94abe7}.section h2{color:#142447}.workspace #nav{background:linear-gradient(160deg,#16274e,#10192f);border-color:#365294}.workspace #nav button:hover,.workspace #nav button[aria-current=page]{background:#28457f}.inbox aside,.profile-card{background:#eaf0fd}.bubble.mine{background:#dfe9ff}.unread{display:inline-grid!important;place-items:center;min-width:23px;height:23px;padding:0 5px;background:#385bd6;color:white!important;border-radius:99px;font-size:.75rem;font-weight:800;line-height:1;margin:0!important}.message-count:empty,.thread-count:empty{display:none}.workspace #nav .message-count{margin-left:auto}.thread-link .thread-count{display:inline-block;margin:0 0 0 8px}.mobile-menu .unread{font-size:.75rem}.entrance-art:after{border-color:#b4ccff55}.logo{background:#e1eaff;color:#243c80}</style></head>
+<body><header><div class="shell nav"><button id="menu" class="secondary mobile-menu" aria-controls="nav" aria-expanded="false" hidden>Menu</button><a class="brand" href="#" id="home"><span class="mark">i</span><span>ISTIC<span class="brand-accent"> Careers</span></span></a><div class="nav-actions"><button id="language" class="plain"></button></div></div></header><div id="workspace"><button id="menu-backdrop" class="menu-backdrop" type="button" hidden></button><nav id="nav" hidden></nav><main id="main"></main></div><footer><div class="shell footer"><strong>ISTIC Careers</strong><span id="footnote"></span></div></footer><dialog id="dialog" aria-labelledby="modal-title"><div id="modal"></div></dialog><div id="toast" role="status" aria-live="polite"></div><script>const $ = id => document.getElementById(id);
+const read = (key, fallback) => {
+  try { return JSON.parse(localStorage.getItem('istic.' + key)) ?? fallback; }
+  catch { return fallback; }
+};
+const write = (key, value) => { try { localStorage.setItem('istic.' + key, JSON.stringify(value)); } catch { /* Continue in memory when storage is blocked. */ } };
+let english = read('english', false);
+const t = (fr, en) => english ? en : fr;
+const esc = value => String(value ?? '').replace(/[&<>"']/g, character => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[character]));
+const demo = {student:{role:'student',name:'Étudiant ISTIC',email:'etudiant@ucar.tn'},company:{role:'company',name:'Nova Labs',email:'recrutement@novalabs.example'}};
+const types = {intern:['Stage','Internship'],pfe:['Stage PFE','Final-year internship'],job:['Emploi','Full-time job'],part:['Temps partiel','Part-time job']};
+const sampleDetails = [["Build React screens, add API endpoints, and write integration tests.","JavaScript, Git, and familiarity with REST APIs.","Créez des écrans React, ajoutez des routes API et écrivez des tests d’intégration.","JavaScript, Git et bases des API REST."],["Containerize a web application, build a CI pipeline and document deployment.","Linux, networking and Git. Docker experience is helpful.","Conteneurisez une application, configurez un pipeline CI et documentez le déploiement.","Linux, réseaux et Git. Une expérience Docker est appréciée."],["Prepare datasets, validate SQL queries and build operational dashboards.","SQL joins, basic Python and clear communication.","Préparez des jeux de données, validez les requêtes SQL et créez des tableaux de bord.","Jointures SQL, bases en Python et bonne communication."],["Monitor alerts, troubleshoot connectivity and document incidents.","Basic TCP/IP and Linux.","Surveillez les alertes, diagnostiquez les problèmes de connexion et documentez les incidents.","Bases en TCP/IP et Linux."],["Interview users, design accessible prototypes and run usability tests.","A coursework or personal design project and familiarity with Figma.","Interrogez les utilisateurs, créez des prototypes accessibles et réalisez des tests utilisateurs.","Un projet de design et des bases en Figma."],["Build a Flutter onboarding flow and connect it to Firebase.","Dart basics and an example mobile or coursework project.","Développez un parcours Flutter et connectez-le à Firebase.","Bases en Dart et un projet mobile ou universitaire."]];
+const sample = [
+ ['Nova Labs','Développement Full Stack','Full Stack Development','pfe','Tunis','React · Node.js','Créer et tester des fonctionnalités pour une application web.','Build and test features for a web application.'],
+ ['Carthage Systems','Stage Cloud & DevOps','Cloud & DevOps Internship','intern','Borj Cédria','AWS · Docker','Automatiser le déploiement d’une application et documenter son infrastructure.','Automate an application deployment and document its infrastructure.'],
+ ['Medina Digital','Analyste de données junior','Junior Data Analyst','job','Sfax','Python · SQL','Préparer des tableaux de bord et analyser des données opérationnelles.','Build dashboards and analyze operational data.'],
+ ['Atlas Networks','Technicien réseau','Network Technician','part','Tunis','Linux · TCP/IP','Participer au support et à la supervision du réseau.','Help support and monitor the network.'],
+ ['Pixel Studio','Stage UI/UX','UI/UX Internship','intern','Sousse','Figma · Recherche UX','Concevoir des prototypes et mener des tests utilisateurs.','Design prototypes and conduct user testing.'],
+ ['Nova Labs','Développement mobile Flutter','Flutter Mobile Development','pfe','Tunis','Flutter · Firebase','Développer et tester un parcours dans une application mobile.','Develop and test a user flow in a mobile application.']
+].map(([company,fr,en,type,city,skills,description,descriptionEn],id)=>({company,fr,en,type,city,skills,description,descriptionEn,responsibilitiesEn:sampleDetails[id][0],requirementsEn:sampleDetails[id][1],responsibilities:sampleDetails[id][2],requirements:sampleDetails[id][3],id:'sample-'+id,owner:company==='Nova Labs'?demo.company.email:null}));
+
+let thread='';
+const tabStore = {
+  get() { try { return JSON.parse(sessionStorage.getItem('istic.tabAccount')); } catch { return null; } },
+  set(value) { try { sessionStorage.setItem('istic.tabAccount',JSON.stringify(value)); } catch {} }
+};
+document.addEventListener('visibilitychange',()=>{if(!document.hidden&&page==='messages')updateMessages();});
+function threads() {
+  if(!account)return [];
+  return applications.flatMap(application=>{
+    const offer=all().find(item=>item.id===application.offer);
+    if(!offer?.owner)return [];
+    const company=account.role==='company';
+    if(company?offer.owner!==account.email:application.email!==account.email)return [];
+    return [{key:JSON.stringify([offer.id,application.email]),offer,application,partner:company?application.name:offer.company}];
+  });
+}
+function messages(key) {
+  return read('message:'+key, []);
+}
+function inbox() {
+  const available=threads();
+  const selected=available.find(item=>item.key===thread)??available[0];
+  thread=selected?.key??'';
+  return `<section class="shell section"><h2>${t('Messages','Messages')}</h2><p>${t('Retrouvez les échanges liés à vos candidatures.','Find conversations linked to your applications.')}</p>${!selected?'<div class="empty">'+t('Les conversations apparaissent après une candidature à une offre publiée par une entreprise.','Conversations appear after someone applies to an opening posted by a company.')+'</div>':`<div class="inbox"><aside aria-label="${t('Conversations','Conversations')}">${available.map(item=>`<button class="thread-link" data-thread="${esc(item.key)}" aria-current="${item.key===thread}"><strong>${esc(item.partner)}<span class="thread-count"></span></strong><span>${esc(title(item.offer))}</span></button>`).join('')}</aside><div class="thread-area"><div class="thread-heading"><h3>${esc(selected.partner)}</h3><span class="workspace-note">${esc(title(selected.offer))}</span></div><div class="thread-log" id="thread-log" role="log" aria-live="polite"></div>${form('chat',textarea(t('Écrire un message','Write a message'),'message'),t('Envoyer','Send message'))}</div></div>`}</section>`;
+}
+function readKey(key) {
+  return 'read:'+JSON.stringify([account.role,account.email,key]);
+}
+function unreadIn(key) {
+  return messages(key).slice(read(readKey(key),0)).filter(item=>item.role!==account.role).length;
+}
+function badge(count) {
+  return count?'<span class="unread" aria-label="'+count+' '+t('messages non lus','unread messages')+'">'+(count>99?'99+':count)+'</span>':'';
+}
+function updateUnread() {
+  const total=account?threads().reduce((sum,item)=>sum+unreadIn(item.key),0):0;
+  const count=$('nav').querySelector('.message-count');
+  if(count)count.innerHTML=badge(total);
+  const menuCount=$('menu').querySelector('.message-count');
+  if(menuCount)menuCount.innerHTML=badge(total);
+  for(const item of $('main').querySelectorAll('[data-thread] .thread-count')){
+    const key=item.closest('[data-thread]').dataset.thread;
+    item.innerHTML=badge(unreadIn(key));
+  }
+}
+function updateMessages() {
+  const log=$('thread-log');
+  if(!log)return;
+  const items=messages(thread);
+  log.innerHTML=items.length?items.map(message=>`<div class="bubble ${message.role===account.role?'mine':''}">${esc(message.text)}<time datetime="${esc(message.time)}">${new Date(message.time).toLocaleString(t('fr-TN','en-GB'),{dateStyle:'short',timeStyle:'short'})}</time></div>`).join(''):`<p class="muted">${t('Aucun message pour le moment.','No messages yet.')}</p>`;
+  log.scrollTop=log.scrollHeight;
+  if(!document.hidden && items.length!==read(readKey(thread),0))write(readKey(thread),items.length);
+  updateUnread();
+}
+window.addEventListener('storage',event=>{
+  if(event.key==='istic.applications')applications=read('applications',[]);
+  if(event.key==='istic.offers')offers=read('offers',[]);
+  if(page==='messages'&&event.key==='istic.message:'+thread)updateMessages();
+  else if(event.key?.startsWith('istic.message:')||event.key?.startsWith('istic.read:')||['istic.applications','istic.offers'].includes(event.key))updateUnread();
+  if(['istic.applications','istic.offers'].includes(event.key)&&page==='messages'&&!$('thread-log'))render();
+});
+
+let account = tabStore.get();
+let offers = read('offers', []);
+let applications = read('applications', []);
+let saved = read('saved', {});
+let page = account ? 'home' : 'access';
+let role = 'student';
+let category = '';
+let intent = 'signin';
+let profiles = read('profiles', {});
+let filters = {query:'',type:'',city:''};
+const all = () => [...offers,...sample];
+const title = offer => t(offer.fr,offer.en || offer.fr);
+const kind = key => t(...types[key]);
+const slug = value => value.normalize('NFD').replace(/\p{Diacritic}/gu,'').toLowerCase();
+const icons={browse:'M10 17a7 7 0 1 0 0-14 7 7 0 0 0 0 14m5-2 5 5',messages:'M4 5h16v11H9l-5 4z',settings:'M12 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8M4 21v-2a8 6 0 0 1 16 0v2',jobs:'M3 7h18v13H3zM8 7V4h8v3M3 12h18',internships:'m2 9 10-5 10 5-10 5zM6 11v6l6 3 6-3v-6',menu:'M4 6h16M4 12h16M4 18h16',dashboard:'M3 3h7v7H3zm11 0h7v7h-7zM3 14h7v7H3zm11 0h7v7h-7z'};
+const icon=name=>icons[name]?'<svg aria-hidden="true" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="'+icons[name]+'"/></svg>':'';
+let selectedOffer=null;
+const button = (label, action, kind = 'secondary') => `<button type="button" class="${kind}" data-action="${action}">${icon(action.startsWith('dashboard:')?'dashboard':action.split(':').at(-1))}${label}</button>`;
+const allowedTypes = () => category==='internships' ? ['intern','pfe'] : category==='jobs' ? ['job','part'] : Object.keys(types);
+const selectTypes = (keys=allowedTypes()) => keys.map(key=>`<option value="${key}" ${key===filters.type?'selected':''}>${kind(key)}</option>`).join('');
+const msg = message => {
+  $('toast').textContent = message;
+  clearTimeout(msg.timer);
+  msg.timer = setTimeout(()=>$('toast').textContent='',3400);
+};
+function navigate(target) {
+  setMenu(false);
+  page=account ? target : 'access';
+  render();
+  window.scrollTo(0,0);
+}
+function setAccount(user) {
+  account=user;
+  category='';
+  filters={query:'',type:'',city:''};
+  tabStore.set(user);
+  thread='';
+  $('dialog').close();
+  navigate(user?.role==='company'?'company':'home');
+}
+function modal(heading, content) {
+  $('modal').innerHTML = button('✕','close','plain close') + `<h2 id="modal-title">${heading}</h2>` + content;
+  $('modal').querySelector('.close').setAttribute('aria-label',t('Fermer','Close'));
+  if (!$('dialog').open) $('dialog').showModal();
+}
+function form(id, fields, submit) {
+  return `<form id="${id}">${fields}<button class="primary">${submit}</button></form>`;
+}
+function field(label, name, options='required', type='text') {
+  return `<label>${label}<input name="${name}" type="${type}" ${options}></label>`;
+}
+function textarea(label,name,required='required') {
+  return `<label>${label}<textarea name="${name}" rows="3" maxlength="1500" ${required}></textarea></label>`;
+}
+function auth(selected='student') {
+  role=selected;
+  navigate('access');
+}
+function access() {
+  const company=role==='company';
+  const profile=demo[role];
+  return `<section class="shell entrance"><aside class="entrance-art"><div class="entrance-copy"><span class="eyebrow">ISTIC · BORJ CÉDRIA</span><h1>${t('Votre avenir commence ici.','Your future starts here.')}</h1><p>${t('La plateforme de stages et d’emploi qui relie les étudiants de l’ISTIC aux entreprises en Tunisie.','The internship and job portal connecting ISTIC students with employers in Tunisia.')}</p><div class="entrance-tags"><span>${t('Stages & PFE','Internships & PFE')}</span><span>${t('Emplois','Jobs')}</span></div></div></aside><div class="access-panel"><h2>${intent==='signup'?t('Créer un compte','Create an account'):t('Se connecter','Sign in')}</h2><p class="muted">${t('Choisissez votre espace pour continuer.','Choose your workspace to continue.')}</p><div class="role-picker">${button(t('Étudiant','Student'),'access:student',company?'secondary':'primary')}${button(t('Entreprise','Company'),'access:company',company?'primary':'secondary')}</div>${
+  form('auth',`<input type="hidden" name="role" value="${role}">`+
+  (intent==='signup'?field(company?t('Nom de l’entreprise','Company name'):t('Nom complet','Full name'),'name','required maxlength="80"'):'')+
+  field(company?t('Adresse professionnelle','Work email'):t('Adresse UCAR','UCAR email'),'email',`required maxlength="120" autocomplete="email" placeholder="${profile.email}"`,'email')+
+  `<label for="password">${t('Mot de passe','Password')}</label><div class="password-row"><input id="password" name="password" type="password" minlength="8" required autocomplete="${intent==='signup'?'new-password':'current-password'}">${button(t('Afficher','Show'),'password','secondary')}</div>`+(intent==='signup'?`<small class="muted">${t('Utilisez le mot de passe de test Istic2026!','Use the test password Istic2026!')}</small>`:'') ,intent==='signup'?t('Créer mon compte','Create my account'):t('Se connecter','Sign in'))
+  }<p class="muted switch-mode">${intent==='signup'?t('Vous avez déjà un compte ?','Already have an account?'):t('Vous débutez sur ISTIC Careers ?','New to ISTIC Careers?')} ${button(intent==='signup'?t('Se connecter','Sign in'):t('Créer un compte','Create an account'),'intent','plain')}</p><details class="sample-account"><summary>${t('Identifiants de test','Test credentials')}</summary><p>${profile.email} · Istic2026!</p>${button(t('Remplir les identifiants','Fill in credentials'),'fill','secondary')}</details></div></section>`;
+}
+function settings() {
+  return `<section class="shell section"><div class="settings-panel"><h2>${t('Profil et paramètres','Profile and settings')}</h2><p>${esc(account.email)}</p>${
+    '<div class="profile-card"><span class="profile-avatar">'+esc(account.name.trim().split(/\s+/).slice(0,2).map(word=>word[0]).join('').toUpperCase())+'</span><div><strong>'+esc(account.name)+'</strong><span>'+t(account.role==='company'?'Entreprise':'Étudiant',account.role==='company'?'Company':'Student')+'</span><span>'+esc(account.location||'')+'</span></div></div>'+form('settings',field(account.role==='company'?t('Nom de l’entreprise','Company name'):t('Nom complet','Full name'),'name',`required maxlength="80" value="${esc(account.name)}"`)+
+      field(t('Ville','City'),'location',`maxlength="80" value="${esc(account.location)}"`)+
+      field(account.role==='company'?t('Secteur d’activité','Industry'):t('Filière','Field of study'),'specialty',`maxlength="100" value="${esc(account.specialty)}"`)+
+      `<label>${t('Présentation','About')}<textarea name="bio" rows="4" maxlength="1500">${esc(account.bio)}</textarea></label>`,t('Enregistrer le profil','Save profile'))
+  }<div class="actions">${button(t('Se déconnecter','Sign out'),'logout')}</div></div></section>`;
+}
+const workModes={onsite:['Sur site','On-site'],hybrid:['Hybride','Hybrid'],remote:['Télétravail','Remote']};
+const statuses={submitted:['Envoyée','Submitted'],review:['En cours d’examen','Under review'],shortlisted:['Présélectionnée','Shortlisted'],closed:['Clôturée','Closed']};
+const modeLabel=key=>t(...(workModes[key]??workModes.onsite));
+const statusLabel=key=>t(...(statuses[key]??statuses.submitted));
+function post() {
+  if(account?.role!=='company') return msg(t('Connectez-vous avec un compte entreprise pour publier.','Sign in with a company account to post.'));
+  modal(t('Publier une offre','Post an opening'),form('post',
+    field(t('Intitulé en français','Title in French'),'fr','required maxlength="90"')+
+    field(t('Intitulé en anglais (facultatif)','Title in English (optional)'),'en','maxlength="90"')+
+    `<label>${t('Type de contrat','Contract type')}<select name="type">${selectTypes(Object.keys(types))}</select></label>`+
+    field(t('Ville','City'),'city','required maxlength="65"')+
+    '<label>'+t('Mode de travail','Work arrangement')+'<select name="mode">'+Object.keys(workModes).map(key=>'<option value="'+key+'">'+modeLabel(key)+'</option>').join('')+'</select></label>'+
+    field(t('Date limite (facultatif)','Application deadline (optional)'),'deadline','','date')+
+    field(t('Compétences (facultatif)','Skills (optional)'),'skills','maxlength="110"')+
+    textarea(t('À propos du poste','About the role'),'description')+
+    textarea(t('Missions principales','Key responsibilities'),'responsibilities')+
+    textarea(t('Profil recherché et prérequis','Candidate profile and requirements'),'requirements')+
+    textarea(t('Avantages et rémunération (facultatif)','Benefits and compensation (optional)'),'benefits','')+
+    field(t('Durée ou horaires (facultatif)','Duration or working hours (optional)'),'schedule','maxlength="100"')+
+    textarea(t('Description en anglais (facultatif)','Description in English (optional)'),'descriptionEn',''),t('Publier l’offre','Publish opening')));
+}
+const isExpired=offer=>Boolean(offer.deadline&&Date.now()>=new Date(offer.deadline+'T23:59:59.999').getTime());
+function offerSection(label,value){return value?'<section class="offer-section"><h3>'+label+'</h3><p>'+esc(value)+'</p></section>':'';}
+function listingPage(offer){
+  if(!offer)return home();
+  const submitted=applications.some(item=>item.offer===offer.id&&item.email===account.email);
+  const action=account.role==='company'?'':submitted?'<span class="pill">'+t('Candidature envoyée','Application submitted')+'</span>':isExpired(offer)?'<span class="pill">'+t('Candidatures closes','Applications closed')+'</span>':button(t('Postuler','Apply'),'apply:'+offer.id,'primary');
+  return `<section class="shell section listing-page">${button(t('Retour aux offres','Back to openings'),'back-offer','secondary')}<div class="listing-banner"><span class="pill">${kind(offer.type)}</span><h1>${esc(title(offer))}</h1><p>${esc(offer.company)} · ${esc(offer.city)} · ${modeLabel(offer.mode)}</p></div><div class="listing-layout"><article class="listing-article">${offerSection(t('À propos du poste','About the role'),t(offer.description,offer.descriptionEn||offer.description))}${offerSection(t('Missions principales','Key responsibilities'),t(offer.responsibilities,offer.responsibilitiesEn||offer.responsibilities))}${offerSection(t('Profil et prérequis','Candidate profile and requirements'),t(offer.requirements,offer.requirementsEn||offer.requirements))}${offerSection(t('Avantages et rémunération','Benefits and compensation'),t(offer.benefits,offer.benefitsEn||offer.benefits))}</article><aside class="listing-facts"><h3>${t('Détails de l’offre','Opening details')}</h3><dl><dt>${t('Lieu','Location')}</dt><dd>${esc(offer.city)}</dd><dt>${t('Organisation du travail','Work arrangement')}</dt><dd>${modeLabel(offer.mode)}</dd>${offer.schedule?'<dt>'+t('Durée ou horaires','Duration or hours')+'</dt><dd>'+esc(offer.schedule)+'</dd>':''}${offer.deadline?'<dt>'+t('Date limite','Application deadline')+'</dt><dd>'+esc(offer.deadline)+'</dd>':''}${offer.skills?'<dt>'+t('Compétences','Skills')+'</dt><dd>'+esc(offer.skills)+'</dd>':''}</dl>${action}</aside></div></section>`;
+}
+function offerDetails(offer) {
+  const applied = account && applications.some(a=>a.offer===offer.id && a.email===account.email);
+  modal(esc(title(offer)), `<p class="muted">${esc(offer.company)} · ${esc(offer.city)} · ${kind(offer.type)}</p><p>${esc(t(offer.description,offer.descriptionEn||offer.description))}</p>${offerSection(t('Missions principales','Key responsibilities'),offer.responsibilities)}${offerSection(t('Profil et prérequis','Candidate profile and requirements'),offer.requirements)}${offerSection(t('Durée ou horaires','Duration or working hours'),offer.schedule)}${offerSection(t('Avantages et rémunération','Benefits and compensation'),offer.benefits)}<p>${esc(offer.skills)}</p><p class="form-note">${modeLabel(offer.mode)}${offer.deadline?" · "+t("Date limite","Apply by")+" "+esc(offer.deadline):""}</p>`+
+  (account?.role==='company'?'':applied?`<span class="pill">${t('Candidature envoyée','Application submitted')}</span>`:isExpired(offer)?'<span class="pill">'+t('Candidatures closes','Applications closed')+'</span>':button(t('Postuler','Apply'),'apply:'+offer.id,'primary')));
+}
+function apply(offer) {
+  if(account?.role!=='student') return;
+  if(applications.some(a=>a.offer===offer.id && a.email===account.email)) return offerDetails(offer);
+  modal(t('Postuler','Apply'),`<p>${esc(title(offer))} · ${esc(offer.company)}</p>`+form('apply',`<input type="hidden" name="offer" value="${esc(offer.id)}">`+textarea(t('Message à l’entreprise','Message to the employer'),'message')+
+  field(t('Nom du fichier CV (facultatif)','CV filename (optional)'),'cv','maxlength="120" placeholder="CV.pdf"')+t('Envoyer la candidature','Submit application')));
+}
+const bookmarked = id=>account?.role==='student' && (saved[account.email]??[]).includes(id);
+function card(offer) {
+  return `<article class="card"><div class="card-head"><span class="logo" aria-hidden="true">${esc(offer.company.split(/\s+/).map(word=>word[0]).slice(0,2).join('').toUpperCase())}</span><span class="pill">${kind(offer.type)}</span></div><h3>${esc(title(offer))}</h3><div class="meta">${esc(offer.company)} · ${esc(offer.city)}</div><div class="tags">${esc(offer.skills)}</div><p class="listing-summary">${esc(t(offer.description,offer.descriptionEn||offer.description))}</p><div class="form-note">${modeLabel(offer.mode)}${offer.deadline?" · "+t("Date limite","Apply by")+" "+esc(offer.deadline):""}</div><div class="actions">${button(t('Voir l’offre','View opening'),'offer:'+offer.id)}${account?.role!=='company'?button(bookmarked(offer.id)?t('★ Enregistrée','★ Saved'):t('☆ Enregistrer','☆ Save'),'save:'+offer.id,'plain'):''}</div></article>`;
+}
+function grid(items, empty) {
+  return items.length?items.map(card).join(''):`<div class="empty">${empty}</div>`;
+}
+function updateList() {
+  const query=slug(filters.query.trim());
+  const items=all().filter(offer=>(!category || (category==='internships' ? ['intern','pfe'].includes(offer.type) : ['job','part'].includes(offer.type)))&&(!filters.type||offer.type===filters.type)&&(!filters.city||offer.city===filters.city)&&slug([offer.fr,offer.en,offer.company,offer.city,offer.skills].join(' ')).includes(query));
+  $('result').textContent=t('Offres trouvées','Openings found')+' · '+items.length;
+  $('list').innerHTML=grid(items,t('Aucune offre ne correspond à votre recherche.','No openings match your search.'));
+}
+function home() {
+  const cities=[...new Set(all().map(offer=>offer.city))].sort();
+  return `<div class="shell"><section class="hero"><div><span class="eyebrow">${t('Plateforme carrière · ISTIC','Career portal · ISTIC')}</span><h1>${t('Trouvez votre<br><em>prochaine opportunité.</em>','Find your<br><em>next opportunity.</em>')}</h1><p>${t('Stages, projets de fin d’études et premiers emplois pour les étudiants de l’ISTIC en Tunisie.','Internships, final-year projects and first jobs for ISTIC students in Tunisia.')}</p><div class="actions"><a class="primary" href="#opportunities">${t('Explorer les offres','Explore openings')}</a>${account.role==='company'?button(t('Publier une offre','Post an opening'),'post'):''}</div></div><div class="art" aria-hidden="true"><div class="orbit"></div><div class="tile">✳</div><div class="spark">✧</div><div class="spark small">✦</div></div></section>
+  <section class="section" id="opportunities"><h2>${category==='internships'?t('Stages et PFE','Internships and final-year projects'):category==='jobs'?t('Offres d’emploi','Job openings'):t('Offres à découvrir','Explore opportunities')}</h2><p>${t('Recherchez par domaine, ville ou type de contrat.','Search by field, city or contract type.')}</p><div class="filters"><input type="search" id="query" aria-label="${t('Rechercher','Search')}" placeholder="${t('Métier, entreprise ou compétence','Role, company or skill')}" value="${esc(filters.query)}"><select id="type" aria-label="${t('Type de contrat','Contract type')}"><option value="">${t('Tous les contrats','All contracts')}</option>${selectTypes()}</select><select id="city" aria-label="${t('Ville','City')}"><option value="">${t('Toutes les villes','All locations')}</option>${cities.map(city=>`<option ${city===filters.city?'selected':''}>${esc(city)}</option>`).join('')}</select>${button(t('Réinitialiser','Reset'),'reset','plain')}</div><p class="result" id="result" aria-live="polite"></p><div id="list" class="grid"></div></section></div>`;
+}
+function reviewControl(application){
+  const key=esc(JSON.stringify([application.offer,application.email]));
+  const options=Object.keys(statuses).map(status=>'<option value="'+status+'" '+(status===(application.status||'submitted')?'selected':'')+'>'+statusLabel(status)+'</option>').join('');
+  return '<label>'+t('Statut de la candidature','Application status')+'<select data-review="'+key+'">'+options+'</select></label>';
+}
+function dashboard() {
+  const company=page==='company';
+  const owned=all().filter(offer=>offer.owner===account.email);
+  const received=applications.filter(a=>company?owned.some(o=>o.id===a.offer):a.email===account.email);
+  const items=company?owned:all().filter(offer=>bookmarked(offer.id));
+  return `<section class="shell section"><h2>${company?t('Espace entreprise','Company dashboard'):t('Espace étudiant','Student dashboard')}</h2><p>${esc(account.name)} · ${esc(account.email)}</p><div class="actions">${company?button(t('Publier une offre','Post an opening'),'post','primary'):button(t('Explorer les offres','Explore openings'),'browse','primary')}${button(t('Se déconnecter','Sign out'),'logout')}</div><div class="application-list"><h3>${company?t('Vos offres','Your openings'):t('Offres enregistrées','Saved openings')}</h3><div class="grid">${grid(items,t('Aucune offre pour le moment.','No openings yet.'))}</div><h3>${company?t('Candidatures reçues','Received applications'):t('Mes candidatures','My applications')}</h3><div class="grid">${received.length?received.map(a=>`<article class="card"><h3>${esc(title(all().find(o=>o.id===a.offer)))}</h3><div class="meta">${esc(company?a.name+' · '+a.email:all().find(o=>o.id===a.offer).company)}</div><div>${esc(a.message)}</div>${a.cv?`<div class="muted">CV · ${esc(a.cv)}</div>`:''}<div><span class="pill">${statusLabel(a.status)}</span></div>${company?reviewControl(a):''}${all().find(o=>o.id===a.offer)?.owner?`<button class="secondary" data-thread="${esc(JSON.stringify([a.offer,a.email]))}">${t('Ouvrir la conversation','Open conversation')}</button>`:''}</article>`).join(''):`<div class="empty">${t('Aucune candidature pour le moment.','No applications yet.')}</div>`}</div></div></section>`;
+}
+function render() {
+  $('workspace').className=account?'workspace':'';
+  $('nav').hidden=!account;
+  $('menu').hidden=!account;
+  $('menu').innerHTML=icon('menu')+t('Menu','Menu')+'<span class="message-count"></span>';
+  $('menu').setAttribute('aria-label',t('Menu','Menu'));
+  document.documentElement.lang=english?'en':'fr';
+  $('language').textContent=english?'FR':'EN';
+  $('language').setAttribute('aria-label',english?'Passer au français':'Switch to English');
+
+
+  $('nav').innerHTML=account ? button(t('Fermer le menu','Close menu'),'close-menu','plain drawer-close')+button(t('Tableau de bord','Dashboard'),'dashboard:'+account.role,'plain')+button(t('Toutes les offres','All openings'),'browse','plain')+button(t('Stages','Internships'),'category:internships','plain')+button(t('Emplois','Jobs'),'category:jobs','plain')+button(t('Messages','Messages')+'<span class="message-count"></span>','messages','plain')+button(t('Mon profil','My profile'),'settings','plain') : '';
+  $('footnote').textContent=t('ISTIC · Borj Cédria, Tunisie','ISTIC · Borj Cédria, Tunisia');
+  const active=page==='home'?(category?'category:'+category:'browse'):page===account?.role?'dashboard:'+account.role:page;
+  $('nav').querySelector('[data-action="'+active+'"]')?.setAttribute('aria-current','page');
+  $('nav').setAttribute('aria-label',t('Navigation principale','Main navigation'));
+  $('menu-backdrop').setAttribute('aria-label',t('Fermer le menu','Close menu'));
+  $('main').innerHTML=page==='access'?access():page==='listing'?listingPage(selectedOffer):page==='messages'?inbox():page==='settings'?settings():page==='home'?home():dashboard();
+  if(page==='messages')updateMessages();
+  else updateUnread();
+  if(page==='home'){
+    updateList();
+    for(const key of ['query','type','city']) $(key).addEventListener('input',event=>{filters[key]=event.target.value;updateList();});
+  }
+}
+$('language').onclick=()=>{english=!english;write('english',english);render();};
+$('home').onclick=event=>{event.preventDefault();navigate('home');};
+
+document.addEventListener('click',event=>{
+  const threadButton=event.target.closest('[data-thread]');
+  if(threadButton){thread=threadButton.dataset.thread;navigate('messages');return;}
+  const target=event.target.closest('[data-action]');
+  if(!target)return;
+  const [action,id]=target.dataset.action.split(':');
+  const offer=all().find(item=>item.id===id);
+  switch(action){
+    case 'browse': category=''; filters.type=''; navigate('home');$('opportunities')?.scrollIntoView();break;
+    case 'category': category=id; filters.type=''; navigate('home');$('opportunities')?.scrollIntoView();break;
+    case 'password': {
+      const input=$('password');
+      input.type=input.type==='password'?'text':'password';
+      target.textContent=input.type==='password'?t('Afficher','Show'):t('Masquer','Hide');
+      break;
+    }
+    case 'close-menu': setMenu(false);$('menu').focus();break;
+    case 'messages': navigate('messages');break;
+    case 'settings': navigate('settings');break;
+    case 'access': auth(id);break;
+    case 'intent': intent=intent==='signup'?'signin':'signup';render();break;
+    case 'fill': {
+      const fields=$('auth').elements;
+      fields.email.value=demo[role].email;
+      fields.email.setCustomValidity('');
+      fields.password.value='Istic2026!';
+      if(fields.name) fields.name.value=demo[role].name;
+      fields.email.focus();
+      break;
+    }
+    case 'dashboard': if(account?.role===id)navigate(id);else auth(id);break;
+    case 'demo': setAccount(demo[id]);break;
+    case 'auth': auth(id);break;
+    case 'post': post();break;
+    case 'offer': selectedOffer=offer; navigate('listing');break;
+    case 'back-offer': navigate('home');$('opportunities').scrollIntoView();break;
+    case 'apply': apply(offer);break;
+    case 'close': $('dialog').close();break;
+    case 'logout': setAccount(null);break;
+    case 'reset': filters={query:'',type:'',city:''};render();$('query').focus();break;
+    case 'save': {
+      if(account?.role!=='student')break;
+      const current=saved[account.email]??[];
+      const wasSaved=current.includes(id);
+      saved[account.email]=wasSaved?current.filter(value=>value!==id):[...current,id];
+      write('saved',saved);
+      render();
+      document.querySelector('[data-action="save:'+id+'"]')?.focus();
+      msg(wasSaved?t('Offre retirée.','Opening removed.'):t('Offre enregistrée.','Opening saved.'));
+      break;
+    }
+  }
+});
+document.addEventListener('change',event=>{
+  const value=event.target.dataset?.review;
+  if(!value||account?.role!=='company'||!Object.hasOwn(statuses,event.target.value))return;
+  const [offerId,email]=JSON.parse(value);
+  const application=applications.find(item=>item.offer===offerId&&item.email===email);
+  if(!application||!all().some(offer=>offer.id===offerId&&offer.owner===account.email))return;
+  application.status=event.target.value;
+  write('applications',applications);
+  event.target.closest('.card').querySelector('.pill').textContent=statusLabel(application.status);
+  msg(t('Statut enregistré.','Status saved.'));
+});
+document.addEventListener('submit',event=>{
+  event.preventDefault();
+  const data=Object.fromEntries([...new FormData(event.target)].map(([key,value])=>[key,value.trim()]));
+  if(event.target.id==='chat'){
+    if(!data.message||!threads().some(item=>item.key===thread))return;
+    try { localStorage.setItem('istic.message:'+thread,JSON.stringify([...messages(thread),{role:account.role,text:data.message,time:new Date().toISOString()}])); }
+    catch { msg(t('Le navigateur bloque le stockage des messages.','The browser is blocking message storage.'));return; }
+    event.target.reset();
+    updateMessages();
+    event.target.elements.message.focus();
+    return;
+  }
+  if(event.target.id==='auth'){
+    data.email=data.email.toLowerCase();
+    const email=event.target.elements.email;
+    if(data.role==='student'&&!/@(?:[a-z0-9-]+\.)*ucar\.tn$/.test(data.email)){
+      email.setCustomValidity(t('Utilisez une adresse @ucar.tn ou un sous-domaine UCAR.','Use an @ucar.tn address or a UCAR subdomain.'));
+      email.reportValidity();
+      email.addEventListener('input',()=>email.setCustomValidity(''),{once:true});
+      return;
+    }
+    const key=data.role+':'+data.email;
+    const sample=demo[data.role];
+    if(data.email===sample.email && intent==='signin' && data.password==='Istic2026!'){
+      setAccount(profiles[key]??sample);
+      return;
+    }
+    if(intent==='signin'){
+      if(!profiles[key] || data.password!=='Istic2026!')return msg(t('Identifiants incorrects.','Incorrect credentials.'));
+      setAccount(profiles[key]);
+      return;
+    }
+    if(!data.name)return msg(t('Saisissez un nom.','Enter a name.'));
+    if(data.password!=='Istic2026!')return msg(t('Utilisez le mot de passe de test indiqué.','Use the test password shown.'));
+    if(profiles[key] || data.email===sample.email)return msg(t('Ce compte existe déjà.','This account already exists.'));
+    delete data.password;
+    profiles[key]=data;
+    write('profiles',profiles);
+    intent='signin';
+    setAccount(data);
+  }
+  if(event.target.id==='settings' && account){
+    if(!data.name)return msg(t('Saisissez un nom.','Enter a name.'));
+    account={...account,...data};
+    profiles[account.role+':'+account.email]=account;
+    write('profiles',profiles);
+    tabStore.set(account);
+    render();
+    msg(t('Profil enregistré.','Profile saved.'));
+  }
+  if(event.target.id==='post'&&account?.role==='company'){
+    if(!data.fr||!data.city||!data.description||!data.responsibilities||!data.requirements)return msg(t('Complétez les champs obligatoires.','Complete all required fields.'));
+    offers=[{...data,id:'local-'+Date.now(),owner:account.email,company:account.name},...offers];
+    write('offers',offers);
+    $('dialog').close();
+    navigate('company');
+    msg(t('Offre publiée dans ce navigateur.','Opening published in this browser.'));
+  }
+  if(event.target.id==='apply'&&account?.role==='student'){
+    const offer=all().find(item=>item.id===data.offer);
+    if(!offer||isExpired(offer))return msg(t('Cette offre est clôturée.','This opening is closed.'));
+    if(!data.message)return msg(t('Ajoutez un message.','Enter a message.'));
+    if(applications.some(a=>a.offer===data.offer&&a.email===account.email))return;
+    applications=[{...data,email:account.email,name:account.name},...applications];
+    write('applications',applications);
+    $('dialog').close();
+    navigate('student');
+    msg(t('Candidature enregistrée dans ce navigateur.','Application saved in this browser.'));
+  }
+});
+render();
+
+function setMenu(open){
+  $('nav').classList.toggle('open',open);
+  $('menu').setAttribute('aria-expanded',String(open));
+  $('menu-backdrop').hidden=!open;
+  if(open)$('nav').querySelector('.drawer-close')?.focus();
+}
+$('menu').onclick=()=>setMenu(!$('nav').classList.contains('open'));
+$('menu-backdrop').onclick=()=>{setMenu(false);$('menu').focus();};
+
+document.addEventListener('keydown',event=>{if(event.key==='Escape'&&$('nav').classList.contains('open')){setMenu(false);$('menu').focus();}});
+</script></body></html>
+
